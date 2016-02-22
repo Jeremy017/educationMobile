@@ -1,0 +1,43 @@
+body{
+    background: #45bcf7;
+    background: #45bcf7;
+}
+.logo{
+    position: absolute;
+    bottom: 50%;
+    height: 50%;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+    left: 20%;
+}
+.company{
+    position: absolute;
+    left: 40%;
+    bottom: 50%;
+    width: 44%;
+    opacity: 1;
+    /* transform: translate(-50%); */
+    -webkit-transform: translateY(50%);    
+    transform: translateY(50%);
+}
+.bottom_area{
+    position: absolute;
+    height: 6%;
+    background-color: #FFFFFF;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    /* opacity: 1; */
+}
+.code{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
+    height: 29%;
+}
+.code img{
+    height: 100%;
+    
+}

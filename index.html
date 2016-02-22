@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<title>沃赛仿真微网站</title>
+
+<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="css/animate.min.css" />
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script src="js/swiper.min.js"></script>
+<script type="text/javascript">
+	var animationEnds = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+
+	var bounceInMove = "animated bounceIn";
+	var innerSlide1Move = "animated bounceInLeft";
+	var innerSlide1Move2 = "animated bounceInRight";
+	var flashMove = "animated flash";
+	//第二屏
+	var cloudMove = "animated fadeInLeft";
+	var companyMove = "animated bounceInUp";
+	//第三屏
+	var homeworkMove = "animated bounceInDown";
+	//经典实验
+	var titleMove = "animated zoomInDown";
+
+	/*定时器*/
+	var lightHide;
+	var lightShow1;
+	var lightShow2;
+	var numberChange;
+	var slogan;
+</script>
+<script>
+$(document).ready(function() {
+
+	var browser = {
+     versions:function(){
+     var u = navigator.userAgent, app = navigator.appVersion;
+     return {//移动终端浏览器版本信息
+          trident: u.indexOf("Trident") > -1, //IE内核
+          presto: u.indexOf("Presto") > -1, //opera内核
+          webKit: u.indexOf("AppleWebKit") > -1, //苹果、谷歌内核
+          gecko: u.indexOf("Gecko") > -1 && u.indexOf("KHTML") == -1, //火狐内核
+          mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+          ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+          android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1, //android终端或者uc浏览器
+          iPhone: u.indexOf("iPhone") > -1 , //是否为iPhone或者QQHD浏览器
+          iPad: u.indexOf("iPad") > -1, //是否iPad
+          webApp: u.indexOf("Safari") == -1 //是否web应该程序，没有头部与底部
+          };
+     }(),
+     language:(navigator.browserLanguage || navigator.language).toLowerCase()
+	}
+
+	var ua = window.navigator.userAgent.toLowerCase(); 
+	if(ua.match(/MicroMessenger/i) == 'micromessenger'){ 
+		$(".dl_link").html("下载客户端请点击右上角，在浏览器中打开");
+	}else{ 
+		if(browser.versions.ios){
+			$(".dl_link")
+			.html("<a href='#' class='ios-dl'>点击下载客户端</a>");
+		}
+
+		if(browser.versions.android){
+			$(".dl_link").html("<a href='http://www.wosaitech.com/apk/TeachPlatformMobile.apk'>点击下载客户端</a>");
+		}
+	} 
+
+	$(".ios-dl").click(function(){
+		alert("ios客户端正在开发中，敬请期待！");
+	});
+
+	function play(){
+		var audio = document.getElementById('media'); 
+		audio.play();
+	}
+
+	var flag = true;
+
+	
+	$("body").on("touchstart",function(){
+		if(flag){
+			play();
+			flag = false;
+		}
+	});
+	
+	
+	$(".music").click(function(){
+		var audio = document.getElementById('media'); 
+		var MCD = document.getElementsByClassName("musicSign").item(0);         
+
+		if(audio.paused){                 
+			audio.play();//audio.play();// 这个就是播放 
+			MCD.className="musicSign musicPlay";
+		}else{
+			audio.pause();// 这个就是暂停
+			MCD.className="musicSign musicPause";
+		}
+	});
+
+
+	function makeMove(picDiv,moveName,img){
+		var $imgDiv = $("."+picDiv);
+		$imgDiv.css("opacity",1);
+
+		if(img){
+			$imgDiv.addClass(moveName).one(animationEnds,function(){
+				$(this).removeClass(moveName);
+			});
+		}else{
+			var $img = $imgDiv.find("img");
+			$img.addClass(moveName).one(animationEnds,function(){
+				$(this).removeClass(moveName);
+			});
+		}
+	}
+		
+	function opacityDown(picDiv,time){
+		var $parentDiv = $("."+picDiv);
+
+		if (typeof(time) == "undefined"){ 
+			$parentDiv.css("opacity",0);
+		}else{
+			$parentDiv.animate({"opacity":0},time);
+		}
+		
+	}
+
+	function changeNumber(){
+		$(".number").removeClass("numberShow");
+		$(".number span").animate({"opacity":0},1000);
+		$(".number1 span").animate({"opacity":1},1000);
+
+		/*$(".slogan3").animate({"opacity":1,"left":"58%","bottom":"57%"},500,function(){
+			$(".slogan2").animate({"opacity":1,"left":"10%","bottom":"57%"},500,function(){
+				$(".slogan1").animate({"opacity":1,"bottom":"71%"},500,function(){
+					
+				});
+			});
+		});*/
+	}
+
+	function showLight(){
+		$(".expendLight").addClass("expendLightShow");
+		$(".centerLight").addClass("centerLightShow");
+		$(".arrow").addClass("arrow_a");
+		$(".arrow1").addClass("arrow1Show");
+		$(".arrow2").addClass("arrow2Show");
+		$(".arrow3").addClass("arrow3Show");
+		$(".arrow4").addClass("arrow4Show");
+		$(".arrow5").addClass("arrow5_a");
+		$(".number").addClass("numberShow");
+		$(".box1").addClass("box1Show");
+		$(".box2").addClass("box2Show");
+	}
+
+	function hideLight(){
+		$(".expendLight").removeClass("expendLightShow");
+		$(".arrow").removeClass("arrow_a");
+		$(".arrow1").removeClass("arrow1Show");
+		$(".arrow2").removeClass("arrow2Show");
+		$(".arrow3").removeClass("arrow3Show");
+		$(".arrow4").removeClass("arrow4Show");
+		$(".arrow5").removeClass("arrow5_a");
+	}
+
+	function showLight2(){
+		$(".expendLight").addClass("expendLightShow");
+		$(".centerLight").addClass("centerLightShow");
+		$(".arrow").addClass("arrow_a");
+		$(".arrow1").addClass("arrow1Show");
+		$(".arrow2").addClass("arrow2Show");
+		$(".arrow3").addClass("arrow3Show");
+		$(".arrow4").addClass("arrow4Show");
+		$(".arrow5").addClass("arrow5_a arrow5_b");
+		//$(".number1").addClass("numberShow");
+		$(".box1").addClass("box1Show");
+		$(".box2").addClass("box2Show");
+	}
+
+	/*第二屏第一页*/
+	function section2slide1Move(){
+		makeMove("image1",innerSlide1Move,false);
+		makeMove("image2",innerSlide1Move,false);
+		makeMove("image3",innerSlide1Move,false);
+		makeMove("image4",innerSlide1Move2,false);
+		makeMove("image5",innerSlide1Move2,false);
+		makeMove("slide1-image6",innerSlide1Move2,false);
+	}
+
+	function onSlideChangeStartH(swiper){
+
+    	console.log("swiperH"+swiper.activeIndex);
+
+    	/*第二屏第一页*/
+    	if(swiper.activeIndex==0){
+			section2slide1Move();
+  		}
+
+  		/*第二屏第二页*/
+    	if(swiper.activeIndex==1){
+    		makeMove("lightning1",flashMove,true);
+    		makeMove("lightning2",flashMove,true);
+    		makeMove("lightning3",flashMove,true);
+    		makeMove("lightning4",flashMove,true);
+
+			makeMove("pad",bounceInMove,true);
+			makeMove("ios",bounceInMove,true);
+			makeMove("mac",bounceInMove,true);
+			makeMove("android",bounceInMove,true);
+
+			opacityDown("image13");
+			opacityDown("image12");
+			opacityDown("slide3-image3");
+  		}
+  		/*第二屏第三页*/
+  		if(swiper.activeIndex==2){
+  			$(".image13").css("opacity",0);
+  			$(".image12").css("opacity",0);
+  			$(".slide3-image3").css("opacity",0);
+
+			$(".image13").css("opacity",1);
+
+			$(".image13").addClass(homeworkMove).one(animationEnds,function(){
+				$(this).removeClass(homeworkMove);
+
+				$(".image12").css("opacity",1);
+
+				$(".image12").addClass(homeworkMove).one(animationEnds,function(){
+					$(this).removeClass(homeworkMove);
+
+					$(".slide3-image3").css("opacity",1);
+
+					$(".slide3-image3").addClass(homeworkMove).one(animationEnds,function(){
+						$(this).removeClass(homeworkMove);
+					});
+				});
+			});
+  		}
+	}
+
+	function showSlogan(){
+		$(".slogan1").addClass("slogan1Move");
+		$(".slogan2").addClass("slogan2Move");
+		$(".slogan3").addClass("slogan3Move");
+	}
+
+	var swiperH = new Swiper('.swiper-container-h', {
+	    pagination: '.swiper-pagination-h',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+	    paginationClickable: true,
+	    spaceBetween: 50,
+	    onSlideChangeStart: function(swiper){
+	    	onSlideChangeStartH(swiper);
+	    }
+	});
+	var swiperV = new Swiper('.swiper-container-v', {
+	    pagination: '.swiper-pagination-v',
+	    paginationClickable: true,
+	    direction: 'vertical',
+	    spaceBetween: 50,
+	    onInit: function(swiper){
+			lightShow1 = setTimeout(showLight,0);
+			lightHide = setTimeout(hideLight,6500);
+			lightShow2 = setTimeout(showLight2,7500);
+			numberChange = setTimeout(changeNumber,14000);	
+
+			slogan = setTimeout(showSlogan,1000);
+			
+		},
+	    onSlideChangeStart: function(swiper){
+	    	console.log("swiperV"+swiper.activeIndex);
+
+	    	/*第一屏*/
+	    	if(swiper.activeIndex==0){
+	    		lightShow1 = setTimeout(showLight,0);
+				lightHide = setTimeout(hideLight,6500);
+				lightShow2 = setTimeout(showLight2,7500);
+				numberChange = setTimeout(changeNumber,14000);	
+
+				slogan = setTimeout(showSlogan,1000);
+	    	}
+
+	    	/*第二屏第一页*/
+	  		if(swiper.activeIndex==1){
+	  			onSlideChangeStartH(swiperH);
+	  	// 		section2slide1Move();
+			  	$(".box1").removeClass("box1Show");
+				$(".box2").removeClass("box2Show");
+			  	$(".number").removeClass("numberShow");
+				$(".number span").animate({"opacity":0});
+				$(".number1 span").animate({"opacity":0});
+	  			$(".expendLight").removeClass("expendLightShow");
+				$(".arrow").removeClass("arrow_a");
+				$(".arrow1").removeClass("arrow1Show");
+				$(".arrow2").removeClass("arrow2Show");
+				$(".arrow3").removeClass("arrow3Show");
+				$(".arrow4").removeClass("arrow4Show");
+				$(".arrow5").removeClass("arrow5_a");
+				$(".slogan1").removeClass("slogan1Move");
+				$(".slogan2").removeClass("slogan2Move");
+				$(".slogan3").removeClass("slogan3Move");
+	  			window.clearTimeout(lightHide);
+	  			window.clearTimeout(lightShow1);
+	  			window.clearTimeout(lightShow2);
+	  			window.clearTimeout(numberChange);
+	  			window.clearTimeout(slogan);
+	  		}
+
+	  		/*第三屏*/
+	  		if(swiper.activeIndex==2){
+	  			$(".line1").css("opacity",1);
+				$(".line2").css("opacity",1);
+
+				makeMove("experiment1",bounceInMove);
+				makeMove("experiment2",bounceInMove);
+				makeMove("experiment3",bounceInMove);
+				makeMove("old",titleMove);
+	  		}
+
+	  		if(swiper.activeIndex==3){
+	  			
+	  		}
+		 }
+	});
+});
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+	<div class="music">
+		<img src="images/common/music.png" class="musicSign">
+	</div>
+
+	<audio loop src="audio/1.mp3" id="media" autoplay preload="auto"></audio>
+
+	<!-- Swiper -->
+    <div class="swiper-container swiper-container-v">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide outer-slide1">
+
+				<div class="show_area">
+
+					
+
+					<div class="guang">
+						<img src="images/section1/guangyuan.png" alt="" class="bottomLight">
+						<img src="images/section1/center.png" alt="" class="centerLight">
+						<img src="images/section1/expendLight.png" alt="" class="expendLight">
+						<img src="images/svg/array.svg" class="arrow">
+					</div>
+					
+					<div class="box1">
+						<img src="images/section1/box1.png">
+					</div>
+
+					<div class="box2">
+						<img src="images/section1/box2.png">
+					</div>
+
+					<div class="triangle">
+						<img src="images/section1/triangle.png" class="sanjiao">
+
+						<img src="images/svg/array1.svg" class="arrow1">
+						<img src="images/svg/array2.svg" class="arrow2">
+						<img src="images/svg/array3.svg" class="arrow3">
+						<img src="images/svg/array4.svg" class="arrow4">
+					</div>
+
+					<div class="number1">
+						<span>0.510</span>
+					</div>
+
+					<div class="number">
+						<span>100%</span>
+					</div>
+
+					<div class="box3">
+						<img src="images/section1/box3.png" class="box3box">
+
+						<img src="images/svg/array5.svg" class="arrow5">
+					</div>
+				</div>		
+
+				<!-- <div class="separate">
+					<img src="images/section1/tuoyuan.png" alt="">
+				</div> -->
+
+				<div class="pc_area">
+					<!-- <div class="circle">
+						<img src="images/section1/circle.png">
+					</div> -->
+
+					<div class="separate">
+						<img src="images/section1/separate.png">
+					</div>
+
+					<div class="outside">
+						<img src="images/section1/desktop.png">
+					</div>
+
+					<div class="slogan slogan1">
+						<img src="images/section1/slogan1.png">
+					</div>
+
+					<div class="slogan slogan2">
+						<img src="images/section1/slogan2.png">
+					</div>
+
+					<div class="slogan slogan3">
+						<img src="images/section1/slogan3.png">
+					</div>
+
+					<img src="images/section1/biaoti.png" class="biaoti">
+					
+					<div class="net">
+						<img src="images/section1/wang.png">
+					</div>
+				</div>
+            </div>
+
+            <div class="swiper-slide">
+				<div class="swiper-container swiper-container-h">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide inner-slide1">
+							
+							<img src="images/section2/slide1/drop1.png" class="drop1">
+							<img src="images/section2/slide1/drop1.png" class="drop2">
+							<img src="images/section2/slide1/net1.png" class="net1">
+
+							<div class="image1">
+								<img src="images/section2/slide1/2-1.png">
+							</div>
+
+							<div class="image2">
+								<img src="images/section2/slide1/2-2.png">
+							</div>
+
+							<div class="image3">
+								<img src="images/section2/slide1/2-3.png">
+							</div>
+
+							<div class="image4">
+								<img src="images/section2/slide1/2-4.png">
+							</div>
+
+							<div class="image5">
+								<img src="images/section2/slide1/2-5.png">
+							</div>
+
+							<div class="slide1-image6">
+								<img src="images/section2/slide1/2-6.png">
+							</div>
+
+							<div class="cloud">
+								<img src="images/common/cloud.png">
+							</div>
+
+							<div class="menus">
+								<img src="images/section2/slide1/menu.png">
+							</div>
+                        </div>
+
+                        <div class="swiper-slide inner-slide2">
+                        	
+
+							<div class="xuanwo">
+								<img src="images/section2/slide2/xuanwo.png" class="quan">
+
+								<img src="images/section2/slide2/logo_cloud.png" class="logo_cloud">
+
+								<img src="images/section2/slide2/lightning1.png" class="lightning1">
+
+								<img src="images/section2/slide2/lightning2.png" class="lightning2">
+
+								<img src="images/section2/slide2/lightning3.png" class="lightning3">
+
+								<img src="images/section2/slide2/lightning4.png" class="lightning4">
+
+								<img src="images/section2/slide2/android.png" class="android">
+								
+								<img src="images/section2/slide2/ios.png" class="ios">
+								
+								<img src="images/section2/slide2/mac.png" class="mac">
+								
+								<img src="images/section2/slide2/pad.png" class="pad">
+							</div>
+							
+							<div class="cloud">
+								<img src="images/common/cloud.png">
+							</div>
+
+							<div class="menus">
+								<img src="images/section2/slide2/menu.png">
+							</div>
+                        </div>
+
+                        <div class="swiper-slide inner-slide3">
+                        	
+							<div class="skyline">
+								<img src="images/section2/slide3/line1.png" alt="">
+							</div>
+
+							<div class="image13">
+								<img src="images/section2/slide3/homework2.png">
+							</div>
+
+							<div class="image12">
+								<img src="images/section2/slide3/homework1.png">
+							</div>
+
+							<div class="slide3-image3">
+								<img src="images/section2/slide3/homework3.png">
+							</div>
+
+							<div class="groundline">
+								<img src="images/section2/slide3/line2.png" alt="">
+							</div>
+										
+							<div class="cloud">
+								<img src="images/common/cloud.png">
+							</div>
+
+							<div class="menus">
+								<img src="images/section2/slide3/menu.png">
+							</div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="swiper-pagination swiper-pagination-h"></div> -->
+
+                    <!-- Add Arrows -->
+			        <div class="swiper-button-next swiper-button-white"></div>
+			        <div class="swiper-button-prev swiper-button-white"></div>
+                </div>
+            </div>
+
+            <div class="swiper-slide outer-slide3">
+            	
+
+            	<div class="old">
+					<img src="images/section3/old.png">
+				</div>
+
+				<div class="experiment experiment1">
+					<img src="images/section3/shiyan1.png">
+				</div>
+
+				<div class="experiment experiment2">
+					<img src="images/section3/shiyan2.png">
+				</div>
+
+				<div class="experiment experiment3">
+					<img src="images/section3/shiyan3.png">
+				</div>
+            </div>
+
+            <div class="swiper-slide outer-slide4">
+            	
+				
+				<div class="code">
+					<img src="images/section4/code.png">
+
+					<h4 class="dl_link">下载客户端</h4>
+				</div>
+
+				<div class="bottom_area">
+					<img src="images/common/logo.png" class="logo">
+					<img src="images/common/company.png" class="company">
+				</div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-v"></div>
+    </div>
+</body>
+</html>

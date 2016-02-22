@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="183px" height="241.046px" viewBox="0 0 183 241.046" style="enable-background:new 0 0 183 241.046;" xml:space="preserve"
+	>
+<defs>
+	<style type="text/css">
+		.st0{
+			stroke-miterlimit:10;
+			stroke-dasharray:10;
+			<!-- -webkit-animation:move 1s linear 2.5s forwards;
+			animation:move 1s linear 2.5s forwards; -->
+		}
+		<!-- @-webkit-keyframes move{
+			from{
+			  	stroke-dashoffset:380;
+			}
+			to{
+				stroke-dashoffset:0;
+			}
+		}
+		@keyframes move{
+			from{
+			  	stroke-dashoffset:380;
+			}
+			to{
+				stroke-dashoffset:0;
+			}
+		} -->
+	</style>
+</defs>
+<path class="st0" d="M189,0.046c-37.489-1.128-69.748,18.462-95.763,43.308C80.654,55.371,67.74,65.772,58.119,80.299
+	C50.402,91.95,44.436,105,37.007,116.849C13.545,154.268,1.521,197.236,0,241.046" stroke="#fff" stroke-width="4.3" fill="none"/>
+</svg>

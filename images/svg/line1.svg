@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="152px" height="176.646px" viewBox="0 0 152 176.646" style="enable-background:new 0 0 152 176.646;" xml:space="preserve"
+	>
+<defs>
+	<style type="text/css">
+		.st0{
+			stroke-dasharray:100;
+			stroke-dashoffset:0;
+			-webkit-animation:move 1s linear 1s forwards;
+			animation:move 1s linear 1s forwards;
+		}
+
+		<!-- @-webkit-keyframes move{
+			from{
+				stroke-dashoffset: 3;
+				fill:transparent;
+			}
+			to{
+				stroke-dashoffset: 0;	
+				fill:black;
+			}
+		}
+		
+		@keyframes move{
+			from{
+				stroke-dashoffset: 3;
+				fill:transparent;
+			}
+			to{
+				stroke-dashoffset: 0;	
+				fill:black;
+			}
+		} -->
+	</style>
+</defs>
+
+<g>
+	<g>
+		<path class="st0" d="M152.665-0.765c-40.16-7.383-77.938,12.208-102.679,43.247c-30.571,38.353-32.998,88.413-47.397,133.5
+			c-0.984,3.08,3.844,4.388,4.821,1.329C21.206,134.116,23.741,86.645,51.29,48.948C74.194,17.605,111.999-3.175,151.335,4.057
+			C154.487,4.636,155.833-0.182,152.665-0.765L152.665-0.765z" stroke="#fff" stroke-width="4.3" fill="none"/>
+	</g>
+</g>
+</svg>
